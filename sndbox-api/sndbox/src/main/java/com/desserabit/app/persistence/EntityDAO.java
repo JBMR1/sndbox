@@ -8,6 +8,10 @@ public interface EntityDAO {
     Entity[] getEntities() throws IOException;
 
     
-     Entity getEntity(int id) throws IOException;
+    Entity getEntity(int id) throws IOException;
+
+    Entity saveEntity(Entity entity) throws IOException;
+
+    void deleteEntity(int id) throws IOException;
 
 }

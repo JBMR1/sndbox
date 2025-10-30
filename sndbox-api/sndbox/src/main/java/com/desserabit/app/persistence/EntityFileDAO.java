@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 import org.springframework.stereotype.Component;
 
 // import entities.
@@ -32,7 +33,7 @@ public class EntityFileDAO implements EntityDAO {
     
     private String filename;
 
-    public EntityFileDAO(@Value("${entities.json}") String filename, ObjectMapper objectMapper) throws IOException{
+    public EntityFileDAO(@Value("${entities.file}") String filename, ObjectMapper objectMapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectMapper;
         load(); //loads entities from file
@@ -77,12 +78,26 @@ public class EntityFileDAO implements EntityDAO {
 
     @Override
     public Entity[] getEntities() throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        //new Entity[0] works here over new Entity[entities.size()] bc:
+        // toarray will create  correctly sized array internally anyway 
+        return entities.values().toArray(new Entity[0]);
     }
 
     @Override
     public  Entity getEntity(int id) throws IOException{
-        return null;
+        return getEntity(id);
+    }
+
+    @Override
+    public Entity saveEntity(Entity entity) throws IOException{
+        entities.put(entity.getId(), entity);
+        save();
+        return entity;
+    }
+
+    @Override 
+    public void deleteEntity(int id) throws IOException{
+        entities.remove(id);
+        save();
     }
 }

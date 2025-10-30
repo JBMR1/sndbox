@@ -28,6 +28,7 @@ public class EntityController {
     // the entitty data access object that holds our entities
     private EntityDAO entityDAO;
 
+    //GET
     @GetMapping("/{id}")
     public Entity getEntity(@PathVariable int id){
         try{
@@ -39,6 +40,30 @@ public class EntityController {
         }
         return null;
        
+    }
+
+    //POST
+    @PostMapping
+    public Entity saveEntity(@RequestBody Entity entity){
+        try{
+            return entityDAO.saveEntity(entity);
+        }
+        catch(IOException ex){
+            System.out.println(ex.toString());
+            System.out.println("Could not save Entity");
+        }
+        return null;
+    }
+
+    @DeleteMapping
+    public void  deleteEntity(@PathVariable int id){
+        try{
+             entityDAO.deleteEntity(id);
+        }
+        catch(IOException ex){
+            System.out.println(ex.toString());
+            System.out.println("Could not delete Entity");
+        }
     }
 
 }
