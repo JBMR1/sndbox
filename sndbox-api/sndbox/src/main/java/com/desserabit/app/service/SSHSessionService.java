@@ -14,9 +14,11 @@ import com.jcraft.jsch.Session;
 
 @Service
 public class SSHSessionService {
+
+
     ConcurrentHashMap<String, SSHSession> sshSessions;
 
-     private static final String REMOTE_HOST = "bandit.labs.overthewire.org";
+    private static final String REMOTE_HOST = "bandit.labs.overthewire.org";
     private static final String USERNAME = "bandit0";
     private static final String PASSWORD = "bandit0";
     private static final int REMOTE_PORT = 2220;
@@ -62,6 +64,11 @@ public class SSHSessionService {
             System.out.println(exception.toString());
             return null;
         }
+
+    }
+
+    public SSHSession getSession(String sessionId){
+        return sshSessions.get(sessionId);
 
     }
 

@@ -15,10 +15,13 @@ public class SSHSession{
         this.sessionId = sessionId;
         this.jschSession = jschSession;
         this.channel = channel;
-
     }
 
     public void setChannel(Channel channel){
         this.channel = channel;
+    }
+
+    public com.jcraft.jsch.Session getSession(){
+        return this.jschSession;
     }
 }
