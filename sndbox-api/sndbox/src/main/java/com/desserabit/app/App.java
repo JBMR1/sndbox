@@ -1,10 +1,22 @@
 package com.desserabit.app;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+
 /**
- * Hello world!
+ * Hello world! 
+ * and 
+ * Springboot!! hopefully...
  */
-public class App {
+@SpringBootApplication
+public class App implements Runnable{
     public static void main(String[] args) {
         System.out.println("Hello World!");
+       SpringApplication.run(App.class, args);
+    }
+    public void run() {
+
     }
 }
