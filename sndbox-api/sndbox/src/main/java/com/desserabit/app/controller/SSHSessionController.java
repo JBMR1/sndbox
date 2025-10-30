@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desserabit.app.model.SSHSession;
 import com.desserabit.app.service.SSHSessionService;
+import com.jcraft.jsch.ChannelShell;
 
 @RestController
 @RequestMapping("/ssh")
@@ -21,11 +22,14 @@ public class SSHSessionController{
     @Autowired
     private SSHSessionService sshService;
 
+    private static ChannelShell channel;
+
 
     // conenct via ssh
-    @PostMapping("/connect")
-    public void connect(){
-        sshService.openSession();
+    @GetMapping("/connect")
+    public ResponseEntity<String> connect(){
+        String sessionId = sshService.openSession();
+        return ResponseEntity.ok(sessionId);
     }
 
     // recieve terminal output 

@@ -6,7 +6,6 @@ public interface EntityDAO {
     
     // returns array of entities
     Entity[] getEntities() throws IOException;
-
     
     Entity getEntity(int id) throws IOException;
 
