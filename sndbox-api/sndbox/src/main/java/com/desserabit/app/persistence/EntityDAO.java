@@ -10,7 +10,7 @@ public interface EntityDAO {
     
     Entity getEntity(int id) throws IOException;
 
-    Entity saveEntity(Entity entity) throws IOException;
+    Entity createEntity(Entity entity) throws IOException;
 
     void deleteEntity(int id) throws IOException;
 

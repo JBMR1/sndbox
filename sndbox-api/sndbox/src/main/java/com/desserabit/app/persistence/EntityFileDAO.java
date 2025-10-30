@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
 import org.springframework.stereotype.Component;
@@ -19,8 +20,9 @@ import org.springframework.stereotype.Component;
 import com.desserabit.app.model.Entity;
 @Component
 public class EntityFileDAO implements EntityDAO {
+
     // local cache of Need Objects
-    // 
+
     Map<Integer,Entity> entities;
 
 
@@ -33,7 +35,9 @@ public class EntityFileDAO implements EntityDAO {
     
     private String filename;
 
+    @Autowired
     public EntityFileDAO(@Value("${entities.file}") String filename, ObjectMapper objectMapper) throws IOException{
+        
         this.filename = filename;
         this.objectMapper = objectMapper;
         load(); //loads entities from file
@@ -85,11 +89,11 @@ public class EntityFileDAO implements EntityDAO {
 
     @Override
     public  Entity getEntity(int id) throws IOException{
-        return getEntity(id);
+        return entities.get(id);
     }
 
     @Override
-    public Entity saveEntity(Entity entity) throws IOException{
+    public Entity createEntity(Entity entity) throws IOException{
         entities.put(entity.getId(), entity);
         save();
         return entity;

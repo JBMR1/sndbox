@@ -1,5 +1,7 @@
 package com.desserabit.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import java.io.IOException;
 @CrossOrigin(origins = "*")
 public class EntityController {
     // the entitty data access object that holds our entities
+    @Autowired
     private EntityDAO entityDAO;
 
     //GET
@@ -42,11 +45,26 @@ public class EntityController {
        
     }
 
+     //GET
+     //maps to both /entities and /entities/
+    @GetMapping({"", "/"})
+    public ResponseEntity<Entity[]> getEntities(){
+        try{
+            return new ResponseEntity<>(entityDAO.getEntities(), HttpStatus.OK);
+        }
+        catch(IOException ex){
+            System.out.println(ex.toString());
+            System.out.println("Could not return entities");
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+       
+    }
+
     //POST
     @PostMapping
-    public Entity saveEntity(@RequestBody Entity entity){
+    public Entity createEntity(@RequestBody Entity entity){
         try{
-            return entityDAO.saveEntity(entity);
+            return entityDAO.createEntity(entity);
         }
         catch(IOException ex){
             System.out.println(ex.toString());
