@@ -1,5 +1,8 @@
 com\desserabit\app\controller\EntityController.class
 com\desserabit\app\persistence\EntityDAO.class
+com\desserabit\app\controller\SSHSessionController.class
 com\desserabit\app\model\Entity.class
-com\desserabit\app\App.class
 com\desserabit\app\persistence\EntityFileDAO.class
+com\desserabit\app\model\SSHSession.class
+com\desserabit\app\service\SSHSessionService.class
+com\desserabit\app\App.class
