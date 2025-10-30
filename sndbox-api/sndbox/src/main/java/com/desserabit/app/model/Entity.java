@@ -17,7 +17,7 @@ public class Entity {
         return id;
     }
 
-    public String geString(){
+    public String getString(){
         return name;
     }
 

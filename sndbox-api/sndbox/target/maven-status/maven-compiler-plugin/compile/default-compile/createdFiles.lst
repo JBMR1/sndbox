@@ -1,3 +1,4 @@
+com\desserabit\app\controller\EntityController.class
 com\desserabit\app\persistence\EntityDAO.class
 com\desserabit\app\model\Entity.class
 com\desserabit\app\App.class
